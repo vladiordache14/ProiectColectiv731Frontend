@@ -1,7 +1,6 @@
 package com.example.proiectcolectiv731_be.model;
 
 import lombok.Data;
-import lombok.Getter;
 // checks if the email has a valid format according to the standard email format rules
 import javax.validation.constraints.Email;
 // checks that the fields aren't empty

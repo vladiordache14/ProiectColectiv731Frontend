@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,16 +27,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false, length = 30)
+    @Column(name = "username", unique = true)
+    @NotEmpty(message = "Username must not be empty!")
+    @Size(max = 30, message = "Username must not exceed 30 characters!")
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
+    @NotEmpty(message = "Password must not be empty!")
+    @Size(min = 8, message = "Password must be at least 8 characters long!")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$",
+            message = "Password must contain at least one letter, one number, and one special character!")
     private String password;
 
     @Column(name = "email", nullable = false)
+    @NotEmpty(message = "Email must not be empty!")
+    @Email(message = "Invalid email format!")
     private String email;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
+    @NotEmpty(message = "Role must not be empty!")
     private ERole role;
 
     @Column(name = "address")
