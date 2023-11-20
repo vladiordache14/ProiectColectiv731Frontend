@@ -2,8 +2,6 @@ package com.example.proiectcolectiv731_be.model;
 
 import jakarta.persistence.*;
 
-import javax.swing.text.html.ImageView;
-
 @Entity
 @Table(name = "image")
 public class Photo {
