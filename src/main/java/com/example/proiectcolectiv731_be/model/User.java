@@ -35,9 +35,9 @@ public class User {
 
     @Column(name = "password")
     @NotEmpty(message = "Password must not be empty!")
-    @Size(min = 8, message = "Password must be at least 8 characters long!")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$",
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$",
             message = "Password must contain at least one letter, one number, and one special character!")
+    @Size(max = 30, message = "Password must not exceed 30 characters!")
     private String password;
 
     @Column(name = "email", nullable = false)
@@ -50,10 +50,18 @@ public class User {
     private ERole role;
 
     @Column(name = "address")
+    @Size(max = 100, message = "Address must be below 100 characters!")
     private String address;
 
     @Column(name = "phone")
+    @Size(min = 10, max = 10, message = "Phone number must be 10 digits")
     private String phoneNumber;
+
+    @Column(name = "lockedUntil")
+    private Date lockedUntil;
+
+    @Column(name = "tries")
+    private int numberOfTries;
 
     public void createNewUserFromDto(UserDto userDto) {
         this.setUsername(userDto.getUsername());
@@ -63,10 +71,4 @@ public class User {
         this.setAddress(userDto.getAddress());
         this.setPhoneNumber(userDto.getPhoneNumber());
     }
-
-    @Column(name = "lockedUntil")
-    private Date lockedUntil;
-
-    @Column(name = "tries")
-    private int numberOfTries;
 }

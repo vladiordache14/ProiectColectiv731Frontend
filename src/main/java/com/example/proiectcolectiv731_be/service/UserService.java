@@ -27,7 +27,6 @@ public class UserService {
 
         User user = new User();
         user.createNewUserFromDto(userDto);
-
         userRepository.save(user);
     }
 
