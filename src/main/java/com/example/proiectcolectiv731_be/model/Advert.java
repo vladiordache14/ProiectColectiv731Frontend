@@ -1,40 +1,44 @@
 package com.example.proiectcolectiv731_be.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "offers")
-public class Offer {
+@Table(name = "adverts")
+public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long advertId;
 
-    @Column(name = "name", nullable = false, length = 200)
+    @Column(name = "name")
+    @NotEmpty(message = "Name must not be empty!")
+    @Size(max = 20, message = "Name must not exceed 20 characters!")
     private String name;
 
-    @Column(name = "description", nullable = false, length = 300)
+    @Column(name = "description")
+    @NotEmpty(message = "Description must not be empty!")
+    @Size(max = 300, message = "Description must not exceed 300 characters!")
     private String description;
 
-    @Column(name = "price", nullable = false)
-    private Long price;
+    @Column(name = "price")
+    @NotEmpty(message = "Price must not be empty!")
+    private Float price;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "photos")
-    @JsonIgnoreProperties("offer")
-    private List<Photo> photos;
+    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Size(min = 1, max = 3, message = "An advert must have between 1 and 3 images")
+    private List<Photo> images;
 
     @ManyToOne
     @JoinColumn(name = "seller_id", nullable = false)
-    @JsonIgnoreProperties("offers")
     private User seller;
 
     @Column(name = "is_promoted", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")

@@ -1,9 +1,7 @@
 package com.example.proiectcolectiv731_be.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -13,58 +11,34 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="users")
-public class User {
+public class UserDto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true)
     @NotEmpty(message = "Username must not be empty!")
     @Size(max = 30, message = "Username must not exceed 30 characters!")
     private String username;
 
-    @Column(name = "password", nullable = false)
     @NotEmpty(message = "Password must not be empty!")
     @Size(min = 8, message = "Password must be at least 8 characters long!")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$",
             message = "Password must contain at least one letter, one number, and one special character!")
     private String password;
 
-    @Column(name = "email", nullable = false)
     @NotEmpty(message = "Email must not be empty!")
     @Email(message = "Invalid email format!")
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
     @NotEmpty(message = "Role must not be empty!")
     private ERole role;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "phone")
     private String phoneNumber;
 
-    @Column(name = "lockedUntil")
     private Date lockedUntil;
 
-    @Column(name = "tries")
     private Integer numberOfTries;
 
-    @OneToMany(mappedBy = "seller")
-    private List<Advert> adverts;
-
-    public void createNewUserFromDto(UserDto userDto) {
-        this.setUsername(userDto.getUsername());
-        this.setPassword(userDto.getPassword());
-        this.setEmail(userDto.getEmail());
-        this.setRole(userDto.getRole());
-        this.setAddress(userDto.getAddress());
-        this.setPhoneNumber(userDto.getPhoneNumber());
-    }
+    private List<AdvertDto> adverts;
 }

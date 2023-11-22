@@ -5,16 +5,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "photos")
+@Table(name = "images")
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long imageId;
 
     @Column(name = "url", nullable = false)
-    private String photoUrl;
+    private String url;
 
     @ManyToOne
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
+    @JoinColumn(name = "advert_id")
+    private Advert advert;
 }
