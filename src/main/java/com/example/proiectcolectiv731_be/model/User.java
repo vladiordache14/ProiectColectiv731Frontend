@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @Entity
@@ -62,4 +63,10 @@ public class User {
         this.setAddress(userDto.getAddress());
         this.setPhoneNumber(userDto.getPhoneNumber());
     }
+
+    @Column(name = "lockedUntil")
+    private Date lockedUntil;
+
+    @Column(name = "tries")
+    private int numberOfTries;
 }
