@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @Entity
@@ -53,6 +54,9 @@ public class User {
 
     @Column(name = "phone")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Advert> advertSet;
 
     public void createNewUserFromDto(UserDto userDto) {
         this.setUsername(userDto.getUsername());
