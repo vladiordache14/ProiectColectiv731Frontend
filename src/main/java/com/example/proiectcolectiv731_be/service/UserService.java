@@ -22,7 +22,7 @@ public class UserService {
         // Check if the username is unique
         // TODO: 11/18/2023 Custom exceptions for better exception handling, maybe
         if (!isUsernameUnique(username)) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new IllegalArgumentException("Username already exists!");
         }
 
         User user = new User();

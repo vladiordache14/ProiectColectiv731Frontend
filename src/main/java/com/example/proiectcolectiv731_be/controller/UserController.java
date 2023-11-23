@@ -19,7 +19,7 @@ public class UserController {
     public ResponseEntity<String> signUp(@RequestBody UserDto userDto) {
         try {
             userService.signUp(userDto);
-            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("User created successfully!", HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
