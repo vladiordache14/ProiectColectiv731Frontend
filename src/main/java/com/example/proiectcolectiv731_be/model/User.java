@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -58,7 +59,7 @@ public class User {
     private String phoneNumber;
 
     @Column(name = "lockedUntil")
-    private Date lockedUntil;
+    private Timestamp lockedUntil;
 
     @Column(name = "tries")
     private int numberOfTries;
