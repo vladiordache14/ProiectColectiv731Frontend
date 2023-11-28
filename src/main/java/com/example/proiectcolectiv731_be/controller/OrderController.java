@@ -14,21 +14,17 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Order> getAllOrders() { return service.getAllOrders(); }
 
-    @PostMapping("/update")
-    public ResponseEntity<Order> updateOrder(@RequestBody Order updatedOrder) {
-        Order result = service.updateOrder(updatedOrder);
+    @PutMapping("/{id}")
+    public ResponseEntity<Order> putOrder(@RequestBody Order order) {
+        Order result = service.putOrder(order);
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
-        if (service.deleteOrder(id)) {
-            return ResponseEntity.ok("Deleted Order successfully!");
-        } else {
-            return ResponseEntity.ok("Order not found!");
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteOrder(@PathVariable Long id) {
+        return ResponseEntity.ok(service.deleteOrder(id));
     }
 }
