@@ -12,8 +12,6 @@ import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
 public class  ProiectColectiv731BeApplication {
-    @Autowired
-    GMailer m;
 
     public static void main(String[] args) {
         SpringApplication.run(ProiectColectiv731BeApplication.class, args);

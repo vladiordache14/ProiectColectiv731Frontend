@@ -33,13 +33,14 @@ public class UserService {
     }
 
     public void updatePassword(String username,String newPass){
+        //changes the password in the database
         User result= userRepository.findByUsername(username);
         result.setPassword(newPass);
         userRepository.save(result);
 
     }
-
     public String getEmailByUsername(String username){
+        // gets the email address of a user based on their username
         User result= userRepository.findByUsername(username);
         return result.getEmail();
     }

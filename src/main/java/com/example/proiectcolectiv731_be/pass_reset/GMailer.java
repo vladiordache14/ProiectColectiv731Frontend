@@ -10,6 +10,7 @@ public class GMailer {
     @Autowired
     private JavaMailSender mailSender;
     public void sendMail(String subject,String message, String destination){
+        //can be called with any subject, message and destination
         SimpleMailMessage mail=new SimpleMailMessage();
         mail.setFrom("cardealership731@gmail.com");
         mail.setTo(destination);
