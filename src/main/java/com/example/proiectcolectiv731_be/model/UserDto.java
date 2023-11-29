@@ -1,5 +1,6 @@
 package com.example.proiectcolectiv731_be.model;
 
+
 import jakarta.persistence.Column;
 import lombok.Data;
 // checks if the email has a valid format according to the standard email format rules
@@ -14,6 +15,7 @@ import java.util.Date;
 
 @Data
 public class UserDto {
+
     private Long id;
 
     @NotEmpty(message = "Username must not be empty!")
@@ -21,9 +23,11 @@ public class UserDto {
     private String username;
 
     @NotEmpty(message = "Password must not be empty!")
+
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$",
             message = "Password must contain at least one letter, one number, and one special character!")
     @Size(max = 30, message = "Password must not exceed 30 characters!")
+
     private String password;
 
     @NotEmpty(message = "Email must not be empty!")
@@ -31,16 +35,20 @@ public class UserDto {
     private String email;
 
     @NotEmpty(message = "Role must not be empty!")
+
     private String role;
 
     @Size(max = 100, message = "Address must be below 100 characters!")
     private String address;
 
     @Size(min = 10, max = 10, message = "Phone number must be 10 digits")
+
     private String phoneNumber;
 
     private Date lockedUntil;
 
+
     private int numberOfTries;
+
 
 }

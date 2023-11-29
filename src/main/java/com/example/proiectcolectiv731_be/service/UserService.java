@@ -6,7 +6,10 @@ import com.example.proiectcolectiv731_be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+
+
 
 @Service
 public class UserService {
@@ -32,6 +35,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+
     public void updatePassword(String username,String newPass){
         //changes the password in the database
         User result= userRepository.findByUsername(username);
@@ -44,5 +48,7 @@ public class UserService {
         User result= userRepository.findByUsername(username);
         return result.getEmail();
     }
+
+
 
 }

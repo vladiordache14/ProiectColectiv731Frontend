@@ -11,6 +11,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
+
 public class  ProiectColectiv731BeApplication {
 
     public static void main(String[] args) {
