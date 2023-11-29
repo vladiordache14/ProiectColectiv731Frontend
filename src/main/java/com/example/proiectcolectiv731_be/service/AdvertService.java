@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdvertService {
@@ -21,5 +22,22 @@ public class AdvertService {
     @Transactional(readOnly = true)
     public List<Advert> getActiveAdverts() {
         return this.advertRepository.findByIsActive(true);
+    }
+
+    public boolean deleteAdvertById(Long id) {
+        Optional<Advert> optional = advertRepository.findById(id);
+        if (optional.isPresent()) {
+            advertRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateExistingAdvert(Advert advert) {
+        if (advertRepository.findById(advert.getAdvertId()).isPresent()) {
+            advertRepository.save(advert);
+            return true;
+        }
+        return false;
     }
 }

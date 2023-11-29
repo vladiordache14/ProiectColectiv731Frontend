@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface AdvertRepository extends JpaRepository<Advert, Integer> {
+public interface AdvertRepository extends JpaRepository<Advert, Long> {
     @Query(value = "SELECT * FROM adverts WHERE is_active =:value", nativeQuery = true)
     List<Advert> findByIsActive(@Param("value") Boolean isActive);
 }

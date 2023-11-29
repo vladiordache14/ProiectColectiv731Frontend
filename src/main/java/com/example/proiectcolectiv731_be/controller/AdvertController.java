@@ -6,10 +6,7 @@ import com.example.proiectcolectiv731_be.model.AdvertDto;
 import com.example.proiectcolectiv731_be.service.AdvertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +34,17 @@ public class AdvertController {
         } else {
             return ResponseEntity.ok(advertsDto);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAdvertById(@PathVariable Long id) {
+        return advertService.deleteAdvertById(id) ?
+                ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/existing")
+    public ResponseEntity<Void> updateExistingAdvert(@RequestBody Advert advert) {
+        return advertService.updateExistingAdvert(advert) ?
+                ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
