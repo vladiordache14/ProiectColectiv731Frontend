@@ -10,7 +10,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+
+
 import java.util.List;
+
 
 @Data
 @Entity
@@ -18,6 +21,16 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name="users")
 public class User {
+
+
+    private enum ERole {
+        BUYER,
+        SELLER,
+        ADMIN
+    }
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,11 +40,13 @@ public class User {
     @Size(max = 30, message = "Username must not exceed 30 characters!")
     private String username;
 
-    @Column(name = "password", nullable = false)
+
+    @Column(name = "password")
     @NotEmpty(message = "Password must not be empty!")
-    @Size(min = 8, message = "Password must be at least 8 characters long!")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$",
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$",
             message = "Password must contain at least one letter, one number, and one special character!")
+    @Size(max = 30, message = "Password must not exceed 30 characters!")
+
     private String password;
 
     @Column(name = "email", nullable = false)
@@ -39,32 +54,42 @@ public class User {
     @Email(message = "Invalid email format!")
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+
+    @Column(name = "role")
+
     @NotEmpty(message = "Role must not be empty!")
     private ERole role;
 
     @Column(name = "address")
+
+    @Size(max = 100, message = "Address must be below 100 characters!")
     private String address;
 
     @Column(name = "phone")
+    @Size(min = 10, max = 10, message = "Phone number must be 10 digits")
+
     private String phoneNumber;
 
     @Column(name = "lockedUntil")
     private Date lockedUntil;
 
     @Column(name = "tries")
-    private Integer numberOfTries;
 
-    @OneToMany(mappedBy = "seller")
-    private List<Advert> adverts;
+    private int numberOfTries;
+
+    public void setPassword(String newPass){
+        this.password=newPass;
+    }
+
 
     public void createNewUserFromDto(UserDto userDto) {
         this.setUsername(userDto.getUsername());
         this.setPassword(userDto.getPassword());
         this.setEmail(userDto.getEmail());
-        this.setRole(userDto.getRole());
+
+        this.setRole(ERole.valueOf(userDto.getRole()));
         this.setAddress(userDto.getAddress());
         this.setPhoneNumber(userDto.getPhoneNumber());
     }
 }
+
