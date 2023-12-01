@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -34,6 +35,13 @@ public class AdvertController {
         } else {
             return ResponseEntity.ok(advertsDto);
         }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AdvertDto> getAdvertById(@PathVariable Long id) {
+        Optional<Advert> optAdvert = advertService.getAdvertById(id);
+        return optAdvert.isPresent() ?
+                ResponseEntity.ok(advertMapper.map(optAdvert.get())) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")

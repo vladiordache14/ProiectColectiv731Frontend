@@ -24,9 +24,12 @@ public class AdvertService {
         return this.advertRepository.findByIsActive(true);
     }
 
+    public Optional<Advert> getAdvertById(Long id) {
+        return advertRepository.findById(id);
+    }
+
     public boolean deleteAdvertById(Long id) {
-        Optional<Advert> optional = advertRepository.findById(id);
-        if (optional.isPresent()) {
+        if (advertRepository.findById(id).isPresent()) {
             advertRepository.deleteById(id);
             return true;
         }
