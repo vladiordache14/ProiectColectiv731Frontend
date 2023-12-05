@@ -41,10 +41,10 @@ public class Advert {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    @Column(name = "is_promoted", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    @Column(name = "is_promoted", nullable = false)
     private boolean isPromoted;
 
-    @Column(name = "is_blocked", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    @Column(name = "is_blocked", nullable = false)
     private boolean isBlocked;
 
     @Column(name = "is_active", nullable = false)
