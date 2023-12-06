@@ -3,9 +3,11 @@ package com.example.proiectcolectiv731_be.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+@Data
 @Entity
 @Getter
 @Setter
@@ -18,35 +20,35 @@ public class Advert {
     private Long advertId;
 
     @Column(name = "name")
+    @NotEmpty(message = "Name must not be empty!")
     @NonNull
     @Size(max = 20, message = "Name must not exceed 20 characters!")
     private String name;
 
     @Column(name = "description")
+    @NotEmpty(message = "Description must not be empty!")
     @NonNull
     @Size(max = 300, message = "Description must not exceed 300 characters!")
     private String description;
 
     @Column(name = "price")
-    @NonNull
+    @NotEmpty(message = "Price must not be empty!")
     private Float price;
 
-    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL, orphanRemoval = true)
-    @NonNull
+    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Size(min = 1, max = 3, message = "An advert must have between 1 and 3 images")
-    private List<Photo> photos;
+    private List<Photo> images;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", nullable = false)
+    private User seller;
 
-    @Column(name = "isPromoted")
-    private Boolean isPromoted = false;
+    @Column(name = "is_promoted", nullable = false)
+    private Boolean isPromoted;
 
-    @Column(name = "isBlocked")
-    private Boolean isBlocked = false;
+    @Column(name = "is_blocked", nullable = false)
+    private Boolean isBlocked;
 
-    @Column(name = "isActive")
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-
 }

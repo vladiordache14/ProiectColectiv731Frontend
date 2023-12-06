@@ -6,6 +6,11 @@ import com.example.proiectcolectiv731_be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
+
+
+
 @Service
 public class UserService {
     @Autowired
@@ -22,13 +27,28 @@ public class UserService {
         // Check if the username is unique
         // TODO: 11/18/2023 Custom exceptions for better exception handling, maybe
         if (!isUsernameUnique(username)) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new IllegalArgumentException("Username already exists!");
         }
 
         User user = new User();
         user.createNewUserFromDto(userDto);
-
         userRepository.save(user);
     }
+
+
+    public void updatePassword(String username,String newPass){
+        //changes the password in the database
+        User result= userRepository.findByUsername(username);
+        result.setPassword(newPass);
+        userRepository.save(result);
+
+    }
+    public String getEmailByUsername(String username){
+        // gets the email address of a user based on their username
+        User result= userRepository.findByUsername(username);
+        return result.getEmail();
+    }
+
+
 
 }
