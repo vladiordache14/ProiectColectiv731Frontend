@@ -87,17 +87,17 @@ public class AdvertControllerTest {
         advert.setName(name);
         advert.setDescription(description);
         advert.setPrice(price);
-        advert.setActive(isActive);
+        advert.setIsActive(isActive);
         return advert;
     }
 
     private AdvertDto createAdvertDto(Long id, String name, String description, Float price, boolean isActive) {
         AdvertDto advertDto = new AdvertDto();
-        advertDto.setAdvertId(id);
+        advertDto.setId(id);
         advertDto.setName(name);
         advertDto.setDescription(description);
         advertDto.setPrice(price);
-        advertDto.setActive(isActive);
+        advertDto.setIsActive(isActive);
         return advertDto;
     }
 }

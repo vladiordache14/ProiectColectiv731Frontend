@@ -22,4 +22,17 @@ public class AdvertService {
     public List<Advert> getActiveAdverts() {
         return this.advertRepository.findByIsActive(true);
     }
+
+    public Advert create(Advert advert) throws IllegalArgumentException {
+        validateAdvert(advert);
+        advertRepository.save(advert);
+        return advert;
+    }
+
+    public void validateAdvert(Advert advert) {
+        String description = advert.getDescription().toLowerCase();
+        if (!description.contains("car") && !description.contains("vehicle") && !description.contains("auto")) {
+            throw new IllegalArgumentException("The description must contain keywords: car/vehicle/auto.");
+        }
+    }
 }
