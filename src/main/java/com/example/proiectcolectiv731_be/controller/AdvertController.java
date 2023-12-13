@@ -38,7 +38,6 @@ public class AdvertController {
         }
     }
 
-<<<<<<< HEAD
     @GetMapping("/{id}")
     public ResponseEntity<AdvertDto> getAdvertById(@PathVariable Long id) {
         Optional<Advert> optAdvert = advertService.getAdvertById(id);
@@ -56,7 +55,8 @@ public class AdvertController {
     public ResponseEntity<Void> updateExistingAdvert(@RequestBody Advert advert) {
         return advertService.updateExistingAdvert(advert) ?
                 ResponseEntity.ok().build() : ResponseEntity.notFound().build();
-=======
+    }
+
     @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<?> createAdvert(@RequestBody AdvertDto advertDto) {
@@ -67,6 +67,5 @@ public class AdvertController {
         catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
->>>>>>> 70af8d6e194c860b3ac4ce31e249dabb3d494af4
     }
 }

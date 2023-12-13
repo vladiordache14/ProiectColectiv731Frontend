@@ -24,7 +24,6 @@ public class AdvertService {
         return this.advertRepository.findByIsActive(true);
     }
 
-<<<<<<< HEAD
     public Optional<Advert> getAdvertById(Long id) {
         return advertRepository.findById(id);
     }
@@ -43,7 +42,8 @@ public class AdvertService {
             return true;
         }
         return false;
-=======
+    }
+
     public Advert create(Advert advert) throws IllegalArgumentException {
         validateAdvert(advert);
         advertRepository.save(advert);
@@ -55,6 +55,5 @@ public class AdvertService {
         if (!description.contains("car") && !description.contains("vehicle") && !description.contains("auto")) {
             throw new IllegalArgumentException("The description must contain keywords: car/vehicle/auto.");
         }
->>>>>>> 70af8d6e194c860b3ac4ce31e249dabb3d494af4
     }
 }
