@@ -5,6 +5,7 @@ import com.example.proiectcolectiv731_be.model.Advert;
 import com.example.proiectcolectiv731_be.model.AdvertDto;
 import com.example.proiectcolectiv731_be.service.AdvertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,7 @@ public class AdvertController {
         }
     }
 
+<<<<<<< HEAD
     @GetMapping("/{id}")
     public ResponseEntity<AdvertDto> getAdvertById(@PathVariable Long id) {
         Optional<Advert> optAdvert = advertService.getAdvertById(id);
@@ -54,5 +56,17 @@ public class AdvertController {
     public ResponseEntity<Void> updateExistingAdvert(@RequestBody Advert advert) {
         return advertService.updateExistingAdvert(advert) ?
                 ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+=======
+    @PostMapping("/create")
+    @ResponseBody
+    public ResponseEntity<?> createAdvert(@RequestBody AdvertDto advertDto) {
+        try {
+            advertService.create(advertMapper.dtoToAdvert(advertDto));
+            return new ResponseEntity<>("Advert created successfully.", HttpStatus.CREATED);
+        }
+        catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+>>>>>>> 70af8d6e194c860b3ac4ce31e249dabb3d494af4
     }
 }

@@ -1,19 +1,19 @@
 package com.example.proiectcolectiv731_be.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "adverts")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="advert")
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,13 @@ public class Advert {
 
     @Column(name = "name")
     @NotEmpty(message = "Name must not be empty!")
+    @NonNull
     @Size(max = 20, message = "Name must not exceed 20 characters!")
     private String name;
 
     @Column(name = "description")
     @NotEmpty(message = "Description must not be empty!")
+    @NonNull
     @Size(max = 300, message = "Description must not exceed 300 characters!")
     private String description;
 
@@ -41,12 +43,12 @@ public class Advert {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    @Column(name = "is_promoted", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
-    private boolean isPromoted;
+    @Column(name = "is_promoted", nullable = false)
+    private Boolean isPromoted;
 
-    @Column(name = "is_blocked", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
-    private boolean isBlocked;
+    @Column(name = "is_blocked", nullable = false)
+    private Boolean isBlocked;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private Boolean isActive;
 }
