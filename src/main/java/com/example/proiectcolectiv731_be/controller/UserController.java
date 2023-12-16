@@ -1,11 +1,14 @@
 package com.example.proiectcolectiv731_be.controller;
 
+import com.example.proiectcolectiv731_be.model.User;
 import com.example.proiectcolectiv731_be.model.UserDto;
 import com.example.proiectcolectiv731_be.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @RestController
@@ -35,5 +38,9 @@ public class UserController {
         }
     }
 
+    @PostMapping("/getCurrentUserData")
+    public Optional<User> getUser(@RequestBody UserDto userDto){
+        return userService.getUserByUsername(userDto.getUsername());
+    }
 }
 
