@@ -35,6 +35,17 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateDetails(UserDto userDto){
+        User user = new User();
+        user.createNewUserFromDto(userDto);
+        User dbUserInstance=userRepository.findByUsername(user.getUsername());
+        dbUserInstance.setPassword(user.getPassword());
+        dbUserInstance.setEmail(user.getEmail());
+        dbUserInstance.setAddress(user.getAddress());
+        dbUserInstance.setPhoneNumber(user.getPhoneNumber());
+        userRepository.save(dbUserInstance);
+    }
+
 
     public void updatePassword(String username,String newPass){
         //changes the password in the database

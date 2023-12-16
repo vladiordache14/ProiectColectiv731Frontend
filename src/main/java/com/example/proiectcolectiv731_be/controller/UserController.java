@@ -25,5 +25,15 @@ public class UserController {
         }
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<String> updateDetails(@RequestBody UserDto userDto) {
+        try {
+            userService.updateDetails(userDto);
+            return new ResponseEntity<>("User updated successfully!", HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
 
