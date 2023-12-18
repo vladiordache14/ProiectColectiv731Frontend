@@ -78,6 +78,7 @@ public class User {
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Advert> advertSet;
 
+    @Column(name = "tries")
     private int numberOfTries;
 
     public void setPassword(String newPass){
