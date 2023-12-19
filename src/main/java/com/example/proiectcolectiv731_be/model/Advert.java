@@ -33,7 +33,6 @@ public class Advert {
 
     @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL, orphanRemoval = true)
     @NonNull
-    @Size(min = 1, max = 3, message = "An advert must have between 1 and 3 images")
     private List<Photo> photos;
 
     @ManyToOne(fetch = FetchType.LAZY)
