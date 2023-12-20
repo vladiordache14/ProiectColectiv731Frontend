@@ -20,7 +20,7 @@ public class AuthenticationController {
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
         try {
             authenticationService.login(userDto);
-            return new ResponseEntity<>("Login successful.", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
