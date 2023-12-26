@@ -9,8 +9,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="adverts")
