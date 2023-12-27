@@ -1,22 +1,22 @@
 package com.example.proiectcolectiv731_be.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
-
+import java.util.Set;
 
 import java.util.List;
 
 
 @Data
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="users")
@@ -74,6 +74,9 @@ public class User {
     private Date lockedUntil;
 
     @Column(name = "tries")
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Advert> advertSet;
 
     private int numberOfTries;
 

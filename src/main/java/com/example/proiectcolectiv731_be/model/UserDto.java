@@ -3,13 +3,10 @@ package com.example.proiectcolectiv731_be.model;
 
 import jakarta.persistence.Column;
 import lombok.Data;
-// checks if the email has a valid format according to the standard email format rules
+
 import javax.validation.constraints.Email;
-// checks that the fields aren't empty
 import javax.validation.constraints.NotEmpty;
-// allows to define a regular expression for more complex password requirements.
 import javax.validation.constraints.Pattern;
-// allows setting size constraints
 import javax.validation.constraints.Size;
 import java.util.Date;
 

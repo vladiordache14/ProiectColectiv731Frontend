@@ -77,7 +77,7 @@ public class AdvertServiceTest {
         advert.setName(name);
         advert.setDescription(description);
         advert.setPrice(price);
-        advert.setActive(isActive);
+        advert.setIsActive(isActive);
         return advert;
     }
 }
