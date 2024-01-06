@@ -1,8 +1,11 @@
 package com.example.proiectcolectiv731_be.mappers;
 
 import com.example.proiectcolectiv731_be.model.*;
+import com.example.proiectcolectiv731_be.model.RequestAdvertDto;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +48,28 @@ public class AdvertMapper {
         a.setSeller(advertDto.getUserId());
         a.setIsActive(advertDto.getIsActive());
         return a;
+    }
+
+    public Advert requestDtoToAdvert(RequestAdvertDto requestAdvertDto) {
+        Advert a = new Advert();
+        a.setName(requestAdvertDto.getName());
+        a.setDescription(requestAdvertDto.getDescription());
+        a.setPrice(requestAdvertDto.getPrice());
+        a.setImages(convertMultipartFilesToAdvertImages(requestAdvertDto.getPhotos()));
+        return a;
+    }
+
+    private List<Photo> convertMultipartFilesToAdvertImages(List<MultipartFile> imageFiles) {
+        List<Photo> advertImages = new ArrayList<>();
+        for (MultipartFile imageFile : imageFiles) {
+            try {
+                Photo advertImage = new Photo();
+                advertImage.setData(imageFile.getBytes());
+                advertImages.add(advertImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return advertImages;
     }
 }

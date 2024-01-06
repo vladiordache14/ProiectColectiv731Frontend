@@ -3,12 +3,15 @@ package com.example.proiectcolectiv731_be.controller;
 import com.example.proiectcolectiv731_be.mappers.AdvertMapper;
 import com.example.proiectcolectiv731_be.model.Advert;
 import com.example.proiectcolectiv731_be.model.AdvertDto;
+import com.example.proiectcolectiv731_be.model.RequestAdvertDto;
 import com.example.proiectcolectiv731_be.service.AdvertService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,13 +62,12 @@ public class AdvertController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<?> createAdvert(@RequestBody AdvertDto advertDto) {
-        try {
-            advertService.create(advertMapper.dtoToAdvert(advertDto));
-            return new ResponseEntity<>("Advert created successfully.", HttpStatus.CREATED);
-        }
-        catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Advert> createAdvert(@RequestParam("advertDto") String advertDtoJson,
+                                               @RequestParam("photos") MultipartFile[] photos) {
+        RequestAdvertDto requestAdvertDto = new Gson().fromJson(advertDtoJson, RequestAdvertDto.class);
+        requestAdvertDto.setPhotos(Arrays.stream(photos).toList());
+        Advert advert = advertMapper.requestDtoToAdvert(requestAdvertDto);
+
+        return ResponseEntity.ok(advertService.create(advert));
     }
 }

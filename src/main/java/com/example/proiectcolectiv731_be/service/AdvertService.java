@@ -1,13 +1,20 @@
 package com.example.proiectcolectiv731_be.service;
 
 import com.example.proiectcolectiv731_be.model.Advert;
+import com.example.proiectcolectiv731_be.model.Photo;
 import com.example.proiectcolectiv731_be.repository.AdvertRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AdvertService {
