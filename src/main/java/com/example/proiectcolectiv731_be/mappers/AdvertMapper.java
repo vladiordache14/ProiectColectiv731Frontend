@@ -56,6 +56,9 @@ public class AdvertMapper {
         a.setDescription(requestAdvertDto.getDescription());
         a.setPrice(requestAdvertDto.getPrice());
         a.setImages(convertMultipartFilesToAdvertImages(requestAdvertDto.getPhotos()));
+        a.setIsPromoted(false);
+        a.setIsBlocked(false);
+        a.setIsActive(true);
         return a;
     }
 
